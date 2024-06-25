@@ -21,6 +21,14 @@ nohup minio server /data &
 # Attendre que MinIO démarre
 sleep 10
 
+# Vérifier si le port MinIO est ouvert
+if nc -zv 127.0.0.1 9000; then
+  echo "MinIO est en cours d'exécution sur le port 9000"
+else
+  echo "Erreur : MinIO n'a pas pu démarrer sur le port 9000"
+  exit 1
+fi
+
 # Configurer MinIO Client (mc) avec les mêmes identifiants
 mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
 mc mb myminio/data
@@ -36,6 +44,9 @@ python manage.py collectstatic --no-input
 
 # Créez un superutilisateur (admin)
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('beninbmcn', 'BMCN.UAC@gmail.com', 'beninbmcn')" | python manage.py shell
+
+# Définir le port Gunicorn explicitement
+export PORT=${PORT:-8000}
 
 # Lancez le serveur Gunicorn
 gunicorn monprojet.wsgi:application --bind 0.0.0.0:$PORT --workers 4
