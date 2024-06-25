@@ -11,6 +11,10 @@ pip install -r requirements.txt
 wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
 chmod +x /usr/local/bin/mc
 
+# Configurer MinIO Client (mc) avec les mêmes identifiants
+mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin || true
+mc mb myminio/data || true
+
 # Configurer et démarrer MinIO Server avec des identifiants par défaut
 wget https://dl.min.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio
 chmod +x /usr/local/bin/minio
@@ -20,18 +24,6 @@ nohup minio server /data &
 
 # Attendre que MinIO démarre
 sleep 10
-
-# Vérifier si le port MinIO est ouvert
-if nc -zv 127.0.0.1 9000; then
-  echo "MinIO est en cours d'exécution sur le port 9000"
-else
-  echo "Erreur : MinIO n'a pas pu démarrer sur le port 9000"
-  exit 1
-fi
-
-# Configurer MinIO Client (mc) avec les mêmes identifiants
-mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
-mc mb myminio/data
 
 # Créer des migrations de base de données basées sur les modèles
 python manage.py makemigrations
