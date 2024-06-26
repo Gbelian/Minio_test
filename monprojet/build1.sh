@@ -28,11 +28,11 @@ export MINIO_ROOT_PASSWORD=minioadmin
 nohup /tmp/minio server /data &
 
 # Attendre que MinIO démarre
-sleep 10
+#sleep 10
 
 # Configurer MinIO Client (mc) avec les mêmes identifiants
-/tmp/mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
-/tmp/mc mb myminio/data
+#/tmp/mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
+#/tmp/mc mb myminio/data
 
 # Collecte des fichiers statiques
 python manage.py collectstatic --no-input
