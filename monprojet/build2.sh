@@ -17,19 +17,18 @@ python manage.py makemigrations
 # Appliquer les migrations de base de données
 python manage.py migrate
 
-# Télécharger et configurer MinIO Server avec des identifiants par défaut
+# Configurer et démarrer MinIO Server avec des identifiants par défaut
 wget https://dl.min.io/server/minio/release/linux-amd64/minio -O /tmp/minio
 chmod +x /tmp/minio
 
-# Démarrer MinIO Server en arrière-plan avec les identifiants par défaut
 export MINIO_ROOT_USER=minioadmin
 export MINIO_ROOT_PASSWORD=minioadmin
 nohup /tmp/minio server /data &
 
-# Attendre que MinIO démarre (ajustez le temps d'attente si nécessaire)
+# Attendre que MinIO démarre
 sleep 10
 
-# Configurer MinIO Client (mc) avec les mêmes identifiants pour interagir avec le serveur MinIO
+# Configurer MinIO Client (mc) avec les mêmes identifiants
 /tmp/mc alias set myminio http://127.0.0.1:9000 minioadmin minioadmin
 /tmp/mc mb myminio/data
 
