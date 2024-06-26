@@ -19,7 +19,10 @@ python manage.py migrate
 
 # Configurer et démarrer MinIO Server avec des identifiants par défaut
 wget https://dl.min.io/server/minio/release/linux-amd64/minio -O /tmp/minio
-chmod +x /tmp/minio
+
+sudo chmod u+rxw /tmp/minio
+sudo chmod u+rxw /tmp/mc
+
 export MINIO_ROOT_USER=minioadmin
 export MINIO_ROOT_PASSWORD=minioadmin
 nohup /tmp/minio server /data &
