@@ -14,7 +14,6 @@ python manage.py makemigrations
 # Appliquer les migrations de base de données
 python manage.py migrate
 
-minio.exe server /data
 
 # Collecte des fichiers statiques
 python manage.py collectstatic --no-input
