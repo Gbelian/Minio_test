@@ -12,6 +12,9 @@ pip install -r requirements.txt
 wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /tmp/mc
 chmod +x /tmp/mc
 
+sudo chmod u+rxw /tmp/mc
+sudo chown -R render. /tmp/mc
+
 # Créer des migrations de base de données basées sur les modèles
 python manage.py makemigrations
 
@@ -21,6 +24,10 @@ python manage.py migrate
 # Télécharger et configurer MinIO Server avec des identifiants par défaut
 wget https://dl.min.io/server/minio/release/linux-amd64/minio -O /tmp/minio
 chmod +x /tmp/minio
+
+sudo chmod u+rxw /tmp/minio
+sudo chown -R render. /tmp/minio
+
 
 # Démarrer MinIO Server en arrière-plan avec les identifiants par défaut
 export MINIO_ROOT_USER=minioadmin
