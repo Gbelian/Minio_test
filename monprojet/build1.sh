@@ -2,6 +2,7 @@
 # Exit on error
 set -o errexit
 
+
 # Mettre à jour pip et installer les dépendances
 python -m pip install --upgrade pip
 pip install gunicorn
