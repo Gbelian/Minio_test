@@ -22,5 +22,5 @@ python manage.py collectstatic --no-input
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('beninbmcn', 'BMCN.UAC@gmail.com', 'beninbmcn')" | python manage.py shell
 
 # Lancer le serveur Gunicorn
-gunicorn monprojet.wsgi:application --bind 0.0.0.0:$PORT --workers 4
+gunicorn monprojet.wsgi:application --bind 0.0.0.0:$PORT --workers 5
 
